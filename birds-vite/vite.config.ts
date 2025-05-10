@@ -10,6 +10,38 @@ export default defineConfig(({ mode }) => {
 			proxy: {
 				'/api/graphql': env.GRAPHQL_ENDPOINT,
 			},
+			hmr: {
+				overlay: false
+			},
+			// Development server optimizations
+			watch: {
+				usePolling: false,
+				ignored: ['**/node_modules/**', '**/dist/**']
+			},
+			fs: {
+				strict: false
+			}
 		},
+		build: {
+			minify: 'terser',
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						vendor: ['react', 'react-dom'],
+						apollo: ['@apollo/client', 'graphql']
+					}
+				}
+			}
+		},
+		optimizeDeps: {
+			include: ['react', 'react-dom', '@apollo/client', 'graphql'],
+			exclude: ['@apollo/client/core']
+		},
+		esbuild: {
+			target: 'esnext',
+			supported: {
+				'top-level-await': true
+			}
+		}
 	};
 });

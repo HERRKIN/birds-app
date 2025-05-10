@@ -1,25 +1,15 @@
-import { gql } from '@apollo/client';
-import { useEffect } from 'react';
 
-import { client } from './lib/apollo';
+import { useQuery } from '@apollo/client';
+
+import { GET_BIRDS } from './lib/queries/birds';
 
 const App = () => {
-	useEffect(() => {
-		client
-			.query({
-				query: gql`
-					query Birds {
-						birds {
-							id
-							english_name
-						}
-					}
-				`,
-			})
-			.then((result) => console.log(result.data));
-	}, []);
+	const { data, loading, error } = useQuery(GET_BIRDS);
 
-	return <div />;
+	if (loading) return <div>Loading...</div>;
+	if (error) return <div>Error: {error.message}</div>;
+
+	return <div>{JSON.stringify(data)}</div>;
 };
 
 export default App;

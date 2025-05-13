@@ -1,3 +1,15 @@
+# How to Run the Birds App
+
+## Prerequisites
+
+- Node.js (v20 or higher)
+- pnpm
+
+1. Clone the repository
+2. pnpm install && pnpm dev
+
+---
+
 # Take Home Exercise
 
 This is a take home exercise where we'll build an web app.

@@ -29,27 +29,30 @@ The schema for the API is the following:
 
 ```graphql
 type Query {
-	birds: [Bird!]!
-	bird(id: ID!): Bird
+  birds: [Bird!]!
+  bird(id: ID!): Bird
 }
 
 type Mutation {
-	addNote(birdId: ID!, comment: String!, timestamp: Int!): ID
+  addNote(birdId: ID!, comment: String!, timestamp: Int!): ID
 }
 
 type Bird {
-	id: ID!
-	thumb_url: String!
-	image_url: String!
-	latin_name: String!
-	english_name: String!
-	notes: [Note!]!
+  id: ID!
+  thumb_url: String!
+  image_url: String!
+  latin_name: String!
+  english_name: String!
+  # spanish_name is in the design files not in the api
+  notes: [Note!]!
 }
 
 type Note {
-	id: ID!
-	comment: String!
-	timestamp: Int! # Milliseconds from epoch.
+  id: ID!
+  comment: String!
+  timestamp: Int! # Milliseconds from epoch. It is ignored because its not in the designs
+  # title is in the design files not in the api
+  # location is in the design files not in the api
 }
 ```
 

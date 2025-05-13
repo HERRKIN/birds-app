@@ -1,15 +1,18 @@
 
-import { useQuery } from '@apollo/client';
+import { Outlet } from 'react-router-dom';
 
-import { GET_BIRDS } from './lib/queries/birds';
-
+import { Sidebar } from './components/sidebar';
 const App = () => {
-	const { data, loading, error } = useQuery(GET_BIRDS);
-
-	if (loading) return <div>Loading...</div>;
-	if (error) return <div>Error: {error.message}</div>;
-
-	return <div>{JSON.stringify(data)}</div>;
+	return (
+		<main className="flex flex-col md:flex-row h-screen">
+			<Sidebar />
+			<section id="scrollable-container" className="flex-1 bg-white border-l border-gray-200 overflow-y-auto">
+				<div className="flex-1 p-4">
+					<Outlet />
+				</div>
+			</section>
+		</main>
+	);
 };
 
 export default App;
